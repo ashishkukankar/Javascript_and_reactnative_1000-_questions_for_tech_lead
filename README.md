@@ -6,11 +6,32 @@ This document lists the **complete 1000+ interview question bank** (questions on
 ---
 
 # Section 1 — JavaScript (Q1–Q250)
-
 1. What is execution context?
+- execution context: It is environment, which handles and execute variable and functions whenever scripts run.
+
 2. Explain call stack vs heap.
+- Stack is temporary memory which store varible and function instant. Heap is longer memory which hold value for longer time
+
 3. What is lexical scope?
 4. Explain closures.
+- Lexical Scope: When child function access parent function's value 
+- Closure: the function which uses lexical environment and hold parent even though it is executed
+  
+ ```javascript const count = 0;
+
+ const add =(function(){
+  count+=1
+  return function(){
+   count+=1
+   console.log(count)
+  }
+ })()
+
+ add()
+ add()
+ ```
+
+
 5. What is hoisting?
 6. Explain TDZ.
 7. Difference between var, let, const.
