@@ -33,8 +33,51 @@ This document lists the **complete 1000+ interview question bank** (questions on
 
 
 5. What is hoisting?
+- Hoisting means a variable can be used earlier before it declared
+```javascript
+ x = 5
+ console.log(x)
+ var x
+```
 6. Explain TDZ.
+- Temporal Dead Zone happens in case of let and const. With var value can be initialized earlier and declared later but this not happed with let and const. 
+```javascript
+console.log(a) //this is temporal dead zone
+let a = 10
+```
 7. Difference between var, let, const.
+ ```javascript
+ //Var: Var is global scope. And its allow re-declaration and upate the value.
+ var a= 10
+ var a= 20 //re-declare the value
+  a = 25  // updating value
+
+  //var allow hoisting
+  a=20
+  console.log(a)
+  var a
+ ```
+ ```javascript
+ //Let: Let is block-scope. And its does not allow re-declaration but allow upate the value.
+ let a= 10
+ let a= 20 //throw error for re-declare the value
+  a = 25  // updating value
+
+  //let does not allow hoisting. It throws reference error and this condition call temporal dead zon
+  a=20
+  console.log(a)
+  let a
+ ```
+ ```javascript
+ //Const: Const is block-scope. And its does not allow re-initialize the value.
+ let a= 10
+  a = 25  // throw error
+
+  //Const does not allow hoisting. It throws reference error and this condition call temporal dead zon
+  a=20
+  console.log(a)
+  const a
+ ```
 8. Explain this binding rules.
 9. call vs apply vs bind.
 10. Explain prototype chain.
