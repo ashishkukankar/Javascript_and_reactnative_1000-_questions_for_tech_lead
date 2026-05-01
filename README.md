@@ -79,9 +79,14 @@ let a = 10
   const a
  ```
 8. Explain this binding rules.
-- Binding is a process in which this keyword associates with variable or object within an execution context. Execution Context holds environment records, for variable and function and this keyword indentify for execution cotext.
+- Binding is associated with "This" keyword. If any function is standalone function then "this" points to global object
+  ```javascript
+   function hello(){
+    console.log(this) //this is pointing to global object ex: window in browser
+   }
+   ```
 - There are 4 binding types
-1. Implicit binding: When we use dot(.) to invoke the object method. This is called Implicit Binding
+1. Implicit binding: When a function is called as member of an object
 ```javascript
 let blog ={
 name: "Sarat",
@@ -90,9 +95,24 @@ message: function(){
  console.log(`$(this.name) is blogs $(this.address)`)
 }
 }
-blog.message();
+blog.message(); //message is member of blog object and it is called using ".".
 ```
+2. Explicit Binding: Use call/apply/binding
+
+3. Use "new" keyword with function. When you call function with "new", 
+- it create an empty object
+- then bind "this" with object
+- execute the function
+- return the object
+```javascript
+function hello(name){
+this.name = name
+}
+cosnt name = new hello("Ashish) 
+
+ ```
 9. call vs apply vs bind.
+
 10. Explain prototype chain.
 11. What is prototypal inheritance?
 12. Explain event loop.
