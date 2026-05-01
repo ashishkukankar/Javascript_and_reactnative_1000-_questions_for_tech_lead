@@ -152,6 +152,8 @@ bindIntroduce()
 ``` 
 
 10. Explain prototype chain.
+11. What is prototypal inheritance?
+
 Before understanding the prototype chain, will understand the prototype
 Prototype: Prototype allow an object to inherit method and variable of other object
 - To do that create an constructor
@@ -191,7 +193,7 @@ const developer ={
 
 developer.greet()
 ```
-11. What is prototypal inheritance?
+
 12. Explain event loop.
 13. Microtask vs macrotask.
 14. Promise lifecycle.
