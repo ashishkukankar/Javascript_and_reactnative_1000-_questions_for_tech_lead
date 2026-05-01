@@ -39,12 +39,14 @@ This document lists the **complete 1000+ interview question bank** (questions on
  console.log(x)
  var x
 ```
+
 6. Explain TDZ.
 - Temporal Dead Zone happens in case of let and const. With var value can be initialized earlier and declared later but this not happed with let and const. 
 ```javascript
 console.log(a) //this is temporal dead zone
 let a = 10
 ```
+
 7. Difference between var, let, const.
  ```javascript
  //Var: Var is global scope. And its allow re-declaration and upate the value.
@@ -78,6 +80,7 @@ let a = 10
   console.log(a)
   const a
  ```
+
 8. Explain this binding rules.
 - Binding is associated with "This" keyword. If any function is standalone function then "this" points to global object
   ```javascript
@@ -111,9 +114,83 @@ this.name = name
 cosnt name = new hello("Ashish) 
 
  ```
+
 9. call vs apply vs bind.
+- this are all comes under explicit binding methods
+1. Call: Call invoke the method imediately. It pass the object as first param and pass other argument by separating with ","
+```javascript
+function introduce(hobby,city){
+  console.log(`I'm ${this.name} and my hobby is ${hoby} and I am living in ${citt}`)
+}
+
+const person = {name: "Ashish"}
+
+introduce.call(person, "coding", "Bengaluru")
+``` 
+2. Apply: Apply also invoke function immediatly. It pass object as first param and pass other arguments in array form
+```javascript
+function introduce(hobby,city){
+  console.log(`I'm ${this.name} and my hobby is ${hoby} and I am living in ${citt}`)
+}
+
+const person = {name: "Ashish"}
+
+introduce.apply(person,["coding", "Bengaluru"])
+``` 
+3. Bind: Unlike other two, this will not ivoke function immediatly. but it return new function with the "this" context.
+- Best usage for listener or callback
+```javascript
+function introduce(hobby,city){
+  console.log(`I'm ${this.name} and my hobby is ${hoby} and I am living in ${citt}`)
+}
+
+const person = {name: "Ashish"}
+
+const bindIntroduce = introduce.bind(person,"coding", "Bengaluru")
+
+bindIntroduce()
+``` 
 
 10. Explain prototype chain.
+Before understanding the prototype chain, will understand the prototype
+Prototype: Prototype allow an object to inherit method and variable of other object
+- To do that create an constructor
+- attach member to that prototype
+- pass it to new object
+```javascript
+function device(){
+  this.device = device //constuctor
+}
+
+//attach member to prototype
+device.prototype.systemOn = function(){
+  console.log(`On the ${this.device}`)
+}
+
+new iPhone =new device("iPhone")
+iPhone.systemOn()
+```
+Prototype chain: It allows to creat chain among the object. To do that use "_ _proto_ _"
+
+- When an object does not have member/variable then it call parent's object using __proto__
+- If parent's object does'nt have value it climb up untill prototype
+- If prototype and doesnt have value then it call prototype.__proto__ which return null and close this chain 
+
+```javascript
+const person = {
+  isHuman: true,
+  greet: function(){
+    console.log("Hello")
+  }
+}
+
+const developer ={
+  isDevelop: true
+  __proto__: person //link developer to person
+}
+
+developer.greet()
+```
 11. What is prototypal inheritance?
 12. Explain event loop.
 13. Microtask vs macrotask.
