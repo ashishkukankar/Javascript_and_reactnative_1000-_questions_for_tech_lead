@@ -195,10 +195,48 @@ developer.greet()
 ```
 
 12. Explain event loop.
+![alt text](./picture/eventloop.001.png "Event Loop")
+
+- Callback: Callback run all synchronous code. It perform operation in LIFO.
+- Browser: All the asynchronous operation perform here sucha fetch, settimeout, listener etc
+- CallBack queue: the asynchronous operation which are completed does not go to callback direct. It is moved in callback queue
+- Microservice queue: This is also called VIP queue. This queue handle callbacks and observers.
+- Event loop: Event loop check Call back after every certain time and if no task is available in callback then it check microservice first and then callback queue if microservice queue is empty.
+
+This is way javascript manage asynchronous using single thread
+
+
 13. Microtask vs macrotask.
+
+
 14. Promise lifecycle.
+![alt text](./picture/promise_lifecycle.001.png "Event Loop")
 15. async/await internals.
+- Internally async/await calls promise object under the hood. When any funtion mark as async then it means that it will definatly return promise object
+- Await will pause the function untill result comes without blocking js thread
+
 16. What is currying?
+- Curring: Currying is closure in which rather than passing all param at once, first function get 1st argument and second new function get next argument
+```javascript
+  function multiply(a){
+
+    return function(b){
+      return a*b
+    }
+  }
+
+  console.log(multiply(2)(3))
+```
+
+```javascript
+ const multiply =(a)=(b)=> a*b
+
+ let double = multiply(2) //a = 2
+ let triple = multiply(4) // a = 4
+
+ console.log(double(5)) // 10
+ console.log(triple(5)) // 20
+```
 17. Partial application difference.
 18. Map vs Object.
 19. WeakMap vs Map.
