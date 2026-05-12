@@ -243,28 +243,92 @@ This is way javascript manage asynchronous using single thread
 # Section 2 — React Native
 
 1. Class vs functional components.
+-  Class is having its own life cycle methods and having state and props to manage data
+- Function does not have life cycle. It uses hooks to manage livecycle and also data.
 
 2. What are props?
-
 3. What is state?
+- Props and State are used to manage data
+Props: Props is used to pass data to function. it can not be modified and it is pass from parent to child component.
+State: State is use to manage the component. Wheneve status modify value it re-render the screen and update the component. It is controlled component
 
 4. Lifecycle methods overview.
+5. useEffect lifecycle mapping.
 
-5. useState internals.
+| Phase     | Class              | Function
+| :--------- | :-----------:     | --------:
+| Mounting  |  CompoentDidMount  | useEffect(()=>{},[])
+| Updating  |ComponentDidUpdate  | useEffect(()=>{},[..])
+| UnMounting|ComponentWillUnMount| useEffect(()=>{return ()=>{}},[])
 
-6. useEffect lifecycle mapping.
+6. useState internals.
 
 7. useMemo vs useCallback.
-
+- UseMemo and useCallback both use for memoiztion. 
+- UseMemo: UseMemo cache the calculation result to avoid the re-render
+```javascript
+ const memoization = useMemo(()=>calSum(a,b),[a.b ])
+```
+- UseCallback:  UseCall  cache the funtion itself and return funtion when it get different dependency
+```javascript
+ const memoCallback = useCallback(()=>{ doSomething(a)},[a])
+```
 8. useRef usage scenarios.
+- UseRef is uncontrol component which hold mutable value in 
+`.control` property. It directly update value to Dom, i.e does not re-render the screen. It mostly use to manage focus, scroll position or measure the dimension
+
+```JavaScript
+const input = useRef(null)
+
+const handleClick =() =>{
+  input.current.focus() //directly calling DOM API
+}
+
+return(<Input ref={input} />)
+
+```
 
 9. Custom hooks patterns.
 
 10. Context API usage.
+- Context API is used to avoid prop drilling. 
+- There are 3 steps to implement
+- `Initialize`
+```Javascript 
+import React, {createContext} from 'react'
 
+  export const themeContext = createContext()
+```
+- `Provider`
+```Javascript 
+   [theme, setTheme] = useState('light')
+
+   const toggleTheme = () =>{
+    return setTheme((prev)=> prev === 'light'?'dark':'light')
+   }
+
+   const value = useMemo(()=>({theme,toggleTheme}),[theme,toggleTheme])
+
+  return(
+    <themeContext.providerr value={value}>
+  )
+```
+
+- `Consumer`
+```Javascript 
+
+  const theme = useContext(themeContext)
+
+```
 11. Redux architecture basics.
+![alt text](./picture/redux.png  "Redux")
+
+- Redux is use to manage state. It is synchronous process and it has 3 main components:
+1. Action: It is plain js object which hold two parameters. first is type and another one is payload 
+2. Reducer: It is pure function which take state and action as argument. Using action.type it check which state need to update and state is updated using payload `return {...state, action.payload}`
 
 12. Redux middleware purpose.
+- Redux middleware purpose to execute asynchronous operation beforer dispatching action to reducer
 
 13. Redux Toolkit advantages.
 
@@ -277,6 +341,8 @@ This is way javascript manage asynchronous using single thread
 17. Avoiding unnecessary re‑renders.
 
 18. FlatList vs ScrollView.
+- Main difference between Flatlist vs Scrollview is that Scrollview render full items and Flatlist do lazy loading . Because of that flatlist scroll smoothly.
+- Flatlist uses this technique called virtualization. In this flatlist calculate the scroll position and viewport position and accordingly show value.
 
 19. FlatList optimization strategies.
 
@@ -299,6 +365,8 @@ This is way javascript manage asynchronous using single thread
 28. Startup performance optimization.
 
 29. Bundle size reduction techniques.
+
+30. Higher order function vs Higher order Class
 
 ---
 
